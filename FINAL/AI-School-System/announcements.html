@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Updates | NAVYUG SCHOOL</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="school-header">
+        <img src="assets/logo.png" alt="School Logo" class="school-logo">
+        <div class="school-text">
+          <h3>NAVYUG SCHOOL</h3>
+          <p>Updates</p>
+        </div>
+      </div>
+      <section class="sidebar-profile">
+        <div class="sidebar-avatar" id="updatesSidebarAvatar">UP</div>
+        <div>
+          <strong id="updatesSidebarName">School Updates</strong>
+          <small id="updatesSidebarRole">Updates</small>
+        </div>
+      </section>
+      <nav>
+        <button id="teacherDashboardLink" type="button" onclick="goToTeacher()">Teacher Dashboard</button>
+        <button id="parentDashboardLink" type="button" onclick="goToParent()">Parent Dashboard</button>
+        <button class="active" type="button" onclick="goToAnnouncements()">
+          <span>What's Going On</span>
+          <span class="nav-badge" data-announcement-count>0</span>
+        </button>
+        <a class="sidebar-logout" href="login.html">Switch Login</a>
+      </nav>
+      <button class="theme-toggle wide" id="themeToggle" type="button">Toggle Theme</button>
+    </aside>
+
+    <main class="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">What's Going On</p>
+          <h1>School Updates</h1>
+        </div>
+        <button class="btn ghost" onclick="history.back()">Back</button>
+      </header>
+
+      <section class="content-grid">
+        <article class="panel">
+          <div class="panel-head"><h2>Announcements</h2></div>
+          <div id="announcementsPageList" class="announcement-list"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toastRoot" class="toast-root"></div>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const role = params.get("role") || localStorage.getItem("announcementRole");
+      const teacherDashboardLink = document.getElementById("teacherDashboardLink");
+      const parentDashboardLink = document.getElementById("parentDashboardLink");
+      const updatesSidebarAvatar = document.getElementById("updatesSidebarAvatar");
+      const updatesSidebarName = document.getElementById("updatesSidebarName");
+      const updatesSidebarRole = document.getElementById("updatesSidebarRole");
+
+      if (role === "teacher" || role === "parent") {
+        localStorage.setItem("announcementRole", role);
+        updatesSidebarAvatar.textContent = role === "teacher" ? "NK" : "P";
+        updatesSidebarName.textContent = role === "teacher" ? "N. KOTHIYAL" : "Parent Portal";
+        updatesSidebarRole.textContent = role === "teacher" ? "Teacher" : "Parent";
+      }
+
+      if (role === "teacher") {
+        parentDashboardLink.classList.add("hidden");
+      } else if (role === "parent") {
+        teacherDashboardLink.classList.add("hidden");
+      }
+
+      renderAnnouncementCards("announcementsPageList", "No updates available");
+      markAnnouncementsSeen();
+    });
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === "announcements") {
+        renderAnnouncementCards("announcementsPageList", "No updates available");
+        markAnnouncementsSeen();
+      }
+    });
+  </script>
+</body>
+</html>
