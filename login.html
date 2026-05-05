@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | NAVYUG SCHOOL</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-visual">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">☾</button>
+      <p class="eyebrow">NAVYUG SCHOOL Access</p>
+      <h1>AI-powered school management for smarter classrooms.</h1>
+      <p>Teacher enters directly. Parent login validates the student ID from Excel and uses the assigned student password.</p>
+      <ul class="auth-features" aria-label="Platform features">
+        <li>AI Face Attendance</li>
+        <li>Real-time Parent Updates</li>
+        <li>Smart Performance Tracking</li>
+      </ul>
+    </section>
+
+    <section class="auth-card">
+      <div class="tabs" role="tablist">
+        <button class="tab active" id="teacherTab" type="button"><span aria-hidden="true">👨‍🏫</span> Teacher</button>
+        <button class="tab" id="parentTab" type="button"><span aria-hidden="true">👨‍👩‍👧</span> Parent</button>
+      </div>
+
+      <form id="teacherForm" class="login-form">
+        <h2>Teacher Login</h2>
+        <label>
+          Staff Name
+          <input id="teacherName" type="text" placeholder="Teacher name" autocomplete="username">
+        </label>
+        <button class="btn primary full" type="submit">Enter Teacher Dashboard</button>
+      </form>
+
+      <form id="parentForm" class="login-form hidden">
+        <h2>Parent Login</h2>
+        <label>
+          Student ID
+          <input id="parentId" type="text" placeholder="Example: 101" autocomplete="username">
+        </label>
+        <label>
+          Password
+          <div class="password-field">
+            <input id="parentPassword" type="password" placeholder="Student password" autocomplete="current-password">
+            <button class="btn ghost compact" id="toggleParentPassword" type="button">Show</button>
+          </div>
+        </label>
+        <button class="btn primary full" type="submit">Enter Parent Dashboard</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="toastRoot" class="toast-root"></div>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/data.js"></script>
+  <script src="data/student-passwords.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

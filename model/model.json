@@ -1,0 +1,1 @@
+﻿{"format":"layers-model","generatedBy":"Teachable Machine placeholder","convertedBy":"TensorFlow.js Converter","modelTopology":{"class_name":"Sequential","config":{"name":"placeholder","layers":[]}},"weightsManifest":[{"paths":["weights.bin"],"weights":[]}]}

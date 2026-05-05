@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAVYUG SCHOOL System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="welcome-shell">
+    <section class="welcome-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">AI-Powered</p>
+        <h1>NAVYUG SCHOOL Management System</h1>
+        <p class="hero-text">A NAVYUG SCHOOL portal for attendance, marks, remarks, leave approvals, and parent-teacher visibility.</p>
+        <div class="hero-actions">
+          <button class="btn primary" onclick="goToLogin()">Open Login</button>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="mini-card">
+          <span>Total Students</span>
+          <strong id="homeTotal">--</strong>
+        </div>
+        <div class="mini-card accent">
+          <span>AI Attendance</span>
+          <strong>Live</strong>
+        </div>
+        <div class="mini-card">
+          <span>Parent Portal</span>
+          <strong>Ready</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toastRoot" class="toast-root"></div>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadExcel();
+      document.getElementById("homeTotal").textContent = getAllStudents().length || "0";
+    });
+  </script>
+</body>
+</html>
