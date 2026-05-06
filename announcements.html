@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>School Updates | NAVYUG SCHOOL</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Parentor School Updates - Smart Parent-Teacher Connectivity Platform">
+  <title>Parentor | School Updates</title>
+  <link rel="stylesheet" href="css/style.css?v=final-polish-2026-05-07">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
       <div class="school-header">
-        <img src="assets/logo.png" alt="School Logo" class="school-logo">
+        <div class="brand-mark school-logo" aria-hidden="true">P</div>
         <div class="school-text">
-          <h3>NAVYUG SCHOOL</h3>
-          <p>Updates</p>
+          <h3>Parentor</h3>
+          <p>School Updates</p>
         </div>
       </div>
       <section class="sidebar-profile">
         <div class="sidebar-avatar" id="updatesSidebarAvatar">UP</div>
         <div>
-          <strong id="updatesSidebarName">School Updates</strong>
+          <strong id="updatesSidebarName">Parentor School Updates</strong>
           <small id="updatesSidebarRole">Updates</small>
         </div>
       </section>
       <nav>
-        <button id="teacherDashboardLink" type="button" onclick="goToTeacher()">Teacher Dashboard</button>
-        <button id="parentDashboardLink" type="button" onclick="goToParent()">Parent Dashboard</button>
+        <button id="teacherDashboardLink" type="button" onclick="goToTeacher()">Parentor Teacher Dashboard</button>
+        <button id="parentDashboardLink" type="button" onclick="goToParent()">Parentor Parent Dashboard</button>
         <button class="active" type="button" onclick="goToAnnouncements()">
           <span>What's Going On</span>
           <span class="nav-badge" data-announcement-count>0</span>
@@ -39,14 +40,22 @@
       <header class="topbar">
         <div>
           <p class="eyebrow">What's Going On</p>
-          <h1>School Updates</h1>
+          <h1>Parentor School Updates</h1>
         </div>
         <button class="btn ghost" onclick="history.back()">Back</button>
       </header>
 
       <section class="content-grid">
         <article class="panel">
-          <div class="panel-head"><h2>Announcements</h2></div>
+          <div class="panel-head">
+            <h2>Parentor Announcements</h2>
+            <div class="filter-pills announcement-filter-pills">
+              <button class="filter-pill active" type="button" data-announcement-filter="all">All</button>
+              <button class="filter-pill" type="button" data-announcement-filter="general">General</button>
+              <button class="filter-pill" type="button" data-announcement-filter="urgent">Urgent</button>
+              <button class="filter-pill" type="button" data-announcement-filter="exam">Exam</button>
+            </div>
+          </div>
           <div id="announcementsPageList" class="announcement-list"></div>
         </article>
       </section>
@@ -55,7 +64,7 @@
 
   <div id="toastRoot" class="toast-root"></div>
   <script src="js/ui.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=daywise-attendance-2026-05-07"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
@@ -79,13 +88,14 @@
         teacherDashboardLink.classList.add("hidden");
       }
 
-      renderAnnouncementCards("announcementsPageList", "No updates available");
+      renderAnnouncementCards("announcementsPageList", "No announcements yet.");
+      setupAnnouncementFilters("announcementsPageList", "No announcements yet.");
       markAnnouncementsSeen();
     });
 
     window.addEventListener("storage", (event) => {
       if (event.key === "announcements") {
-        renderAnnouncementCards("announcementsPageList", "No updates available");
+        renderAnnouncementCards("announcementsPageList", "No announcements yet.");
         markAnnouncementsSeen();
       }
     });

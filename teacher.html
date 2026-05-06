@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teacher Dashboard | NAVYUG SCHOOL</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Parentor Teacher Dashboard - Smart Parent-Teacher Connectivity Platform">
+  <title>Parentor | Teacher Dashboard</title>
+  <link rel="stylesheet" href="css/style.css?v=final-polish-2026-05-07">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
       <div class="school-header">
-        <img src="assets/logo.png" alt="School Logo" class="school-logo">
+        <div class="brand-mark school-logo" aria-hidden="true">P</div>
         <div class="school-text">
-          <h3>NAVYUG SCHOOL</h3>
-          <p>Teacher</p>
+          <h3>Parentor</h3>
+          <p>Teacher Dashboard</p>
         </div>
       </div>
       <section class="sidebar-profile">
@@ -39,8 +40,8 @@
         </div>
       </section>
       <nav>
-        <a class="active" href="teacher.html"><span>&#128202; Dashboard</span></a>
-        <a href="attendance.html">&#128247; AI Attendance</a>
+        <a class="active" href="teacher.html"><span>&#128202; Teacher Dashboard</span></a>
+        <a href="attendance.html">&#128247; Parentor AI Attendance</a>
       </nav>
       <a class="sidebar-logout sidebar-logout-button" href="login.html">&#8635; Switch Login</a>
       <section class="sidebar-card sidebar-summary">
@@ -56,8 +57,8 @@
     <main class="dashboard">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Teacher Dashboard</p>
-          <h1>Student Overview</h1>
+          <p class="eyebrow">Parentor Teacher Dashboard</p>
+          <h1>Welcome, N. KOTHIYAL</h1>
         </div>
         <button class="btn ghost" onclick="goToLogin()">Logout</button>
       </header>
@@ -72,6 +73,7 @@
         <article class="stat-card erp-card success"><span>&#10004; Present</span><strong id="presentToday">0</strong></article>
         <article class="stat-card erp-card danger"><span>&#10060; Absent</span><strong id="absentToday">0</strong></article>
         <article class="stat-card erp-card warning"><span>&#128993; Leave</span><strong id="leaveToday">0</strong></article>
+        <article class="stat-card erp-card warning"><span>Pending Leave Requests</span><strong id="pendingLeaveRequests">0</strong></article>
       </section>
 
       <section class="content-grid analytics-grid teacher-content hidden">
@@ -88,20 +90,90 @@
         </article>
       </section>
 
+      <section class="content-grid attendance-records-grid teacher-content hidden" id="attendanceRecordsSection">
+        <article class="panel wide-panel attendance-records-panel">
+          <div class="panel-head">
+            <h2>Attendance Records</h2>
+            <div class="record-actions">
+              <button class="btn ghost compact" id="printAttendanceReport" type="button">Print</button>
+              <button class="btn primary compact" id="exportAttendanceReport" type="button">Export CSV</button>
+            </div>
+          </div>
+          <div class="attendance-record-controls">
+            <label>
+              Date
+              <input id="attendanceRecordDate" class="search-input" type="date">
+            </label>
+            <label>
+              Status
+              <select id="attendanceRecordFilter" class="search-input">
+                <option value="All">All</option>
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+                <option value="Leave">Leave</option>
+              </select>
+            </label>
+            <label>
+              Search
+              <input id="attendanceRecordSearch" class="search-input" type="search" placeholder="Search ID or student name">
+            </label>
+          </div>
+          <section class="attendance-record-summary" id="attendanceRecordSummary"></section>
+          <div class="attendance-record-charts">
+            <div class="chart-wrap compact-chart">
+              <canvas id="attendanceRecordPieChart" height="180"></canvas>
+            </div>
+            <div class="chart-wrap compact-chart">
+              <canvas id="attendanceRecordBarChart" height="180"></canvas>
+            </div>
+          </div>
+          <div class="table-wrap table attendance-record-table-wrap">
+            <table id="attendanceRecordTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Student Name</th>
+                  <th>Status</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceRecordTableBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
       <section class="content-grid teacher-grid teacher-content hidden">
         <article class="panel large" id="studentsPanel">
           <div class="panel-head">
-            <h2>All Students</h2>
+            <h2>Student Overview</h2>
             <div class="table-tools">
+              <div class="search-wrap">
+                <span aria-hidden="true">Search</span>
+                <input id="studentSearch" class="search-input" type="search" placeholder="Search by ID or name">
+              </div>
               <select id="studentSort" class="search-input" aria-label="Sort students">
-                <option value="">Sort Students</option>
-                <option value="marks">Marks Average</option>
-                <option value="attendance">Attendance</option>
-                <option value="behaviour">Behaviour</option>
+                <option value="id">Sort by ID</option>
+                <option value="name">Name</option>
+                <option value="attendance">Attendance %</option>
+                <option value="present">Present Count</option>
+                <option value="behaviour">Behaviour Points</option>
               </select>
-              <input id="studentSearch" class="search-input" type="search" placeholder="Search by name">
+              <select id="studentRowsPerPage" class="search-input" aria-label="Rows per page">
+                <option value="10">10 rows</option>
+                <option value="25">25 rows</option>
+                <option value="50">50 rows</option>
+                <option value="all">All rows</option>
+              </select>
               <button class="btn ghost compact" id="toggleStudentsPanel" type="button" aria-expanded="true">Contract</button>
             </div>
+          </div>
+          <div class="filter-pills" aria-label="Student status filters">
+            <button class="filter-pill active" type="button" data-status-filter="All">All</button>
+            <button class="filter-pill" type="button" data-status-filter="Present">Present</button>
+            <button class="filter-pill" type="button" data-status-filter="Absent">Absent</button>
+            <button class="filter-pill" type="button" data-status-filter="Leave">Leave</button>
+            <button class="filter-pill" type="button" data-status-filter="Not Taken">Not Marked</button>
           </div>
           <p class="table-notice hidden" id="attendanceNotTakenNotice">Attendance not taken yet. Students are not marked absent until attendance starts.</p>
           <div class="students-compact-summary hidden" id="studentsCompactSummary"></div>
@@ -111,29 +183,28 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Status</th>
-                  <th>Math</th>
-                  <th>Physics</th>
-                  <th>Chemistry</th>
-                  <th>English</th>
-                  <th>CS</th>
-                  <th>Avg</th>
-                  <th>PresentCount</th>
+                  <th>Present Count</th>
                   <th>Attendance %</th>
-                  <th>Alert</th>
-                  <th>BehaviourPoints</th>
-                  <th>ExtraCurricularPoints</th>
+                  <th>Behaviour Points</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody id="studentTableBody"></tbody>
             </table>
           </div>
+          <div class="table-pagination" id="studentPagination"></div>
         </article>
 
         <article class="panel">
           <div class="panel-head">
             <h2>Leave Requests</h2>
+          </div>
+          <div class="leave-filter-summary" id="leaveFilterSummary"></div>
+          <div class="filter-pills" aria-label="Leave request filters">
+            <button class="filter-pill active" type="button" data-leave-filter="All">All</button>
+            <button class="filter-pill" type="button" data-leave-filter="Pending">Pending</button>
+            <button class="filter-pill" type="button" data-leave-filter="Approved">Accepted</button>
+            <button class="filter-pill" type="button" data-leave-filter="Rejected">Rejected</button>
           </div>
           <div id="leaveRequestsPanel" class="stack-list"></div>
         </article>
@@ -153,10 +224,23 @@
             <input id="announcementDate" type="date" required>
             <button class="btn primary full" type="submit">Post Announcement</button>
           </form>
+          <div class="announcement-preview" id="announcementPreview">
+            <span class="announcement-badge general-badge">GENERAL</span>
+            <strong>Announcement preview</strong>
+            <p class="muted">Fill the form to preview the update before posting.</p>
+          </div>
         </article>
 
         <article class="panel">
-          <div class="panel-head"><h2>Recent Updates</h2></div>
+          <div class="panel-head">
+            <h2>Recent Updates</h2>
+            <div class="filter-pills announcement-filter-pills">
+              <button class="filter-pill active" type="button" data-announcement-filter="all">All</button>
+              <button class="filter-pill" type="button" data-announcement-filter="general">General</button>
+              <button class="filter-pill" type="button" data-announcement-filter="urgent">Urgent</button>
+              <button class="filter-pill" type="button" data-announcement-filter="exam">Exam</button>
+            </div>
+          </div>
           <div id="teacherAnnouncementsList" class="announcement-list"></div>
         </article>
       </section>
@@ -167,7 +251,8 @@
     <div class="modal-box">
       <h2>Add Remark</h2>
       <p id="remarkStudentLabel"></p>
-      <textarea id="remarkText" rows="4" placeholder="Write teacher remark"></textarea>
+      <textarea id="remarkText" rows="4" maxlength="180" placeholder="Write teacher remark"></textarea>
+      <small class="muted">Keep remarks short and helpful. Maximum 180 characters.</small>
       <div class="modal-actions">
         <button class="btn ghost" id="cancelRemark" type="button">Cancel</button>
         <button class="btn primary" id="saveRemark" type="button">Save</button>
@@ -177,6 +262,7 @@
 
   <div id="performanceModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-box performance-modal-box">
+      <button class="modal-close" id="closePerformanceTop" type="button" aria-label="Close performance view">x</button>
       <h2>Performance View</h2>
       <p id="performanceStudentLabel"></p>
       <div id="performanceDetails" class="performance-details"></div>
@@ -190,8 +276,8 @@
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/teacher.js"></script>
+  <script src="js/data.js?v=daywise-attendance-2026-05-07"></script>
+  <script src="js/main.js?v=daywise-attendance-2026-05-07"></script>
+  <script src="js/teacher.js?v=final-polish-2026-05-07"></script>
 </body>
 </html>

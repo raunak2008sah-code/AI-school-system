@@ -1,0 +1,12 @@
+{
+  "name": "navyug-school-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend-only Parentor smart parent-teacher connectivity platform demo",
+  "scripts": {
+    "start": "node server.js",
+    "train": "python train_face_model.py --epochs 8 --fine-tune-epochs 0",
+    "train:raw": "python train_face_model.py --epochs 8 --fine-tune-epochs 0 --no-face-crop",
+    "train:opencv": "python train_opencv_face_model.py"
+  }
+}

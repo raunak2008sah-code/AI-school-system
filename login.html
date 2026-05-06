@@ -3,62 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | NAVYUG SCHOOL</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Parentor - Smart Parent-Teacher Connectivity Platform">
+  <title>Parentor | Login</title>
+  <link rel="stylesheet" href="css/style.css?v=final-polish-2026-05-07">
 </head>
 <body>
-  <main class="auth-page">
-    <section class="auth-visual">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">☾</button>
-      <p class="eyebrow">NAVYUG SCHOOL Access</p>
-      <h1>AI-powered school management for smarter classrooms.</h1>
-      <p>Teacher enters directly. Parent login validates the student ID from Excel and uses the assigned student password.</p>
-      <ul class="auth-features" aria-label="Platform features">
-        <li>AI Face Attendance</li>
-        <li>Real-time Parent Updates</li>
-        <li>Smart Performance Tracking</li>
-      </ul>
-    </section>
-
-    <section class="auth-card">
-      <div class="tabs" role="tablist">
-        <button class="tab active" id="teacherTab" type="button"><span aria-hidden="true">👨‍🏫</span> Teacher</button>
-        <button class="tab" id="parentTab" type="button"><span aria-hidden="true">👨‍👩‍👧</span> Parent</button>
+  <main class="welcome-shell school-home login-page-shell">
+    <section class="welcome-hero login-home login-home-full">
+      <div class="hero-copy login-hero-full">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark Mode</button>
+        <div class="brand-lockup hero-brand">
+          <div class="brand-mark" aria-hidden="true">P</div>
+          <div>
+            <p class="eyebrow">Parentor Access</p>
+            <strong>Smart Parent-Teacher Connectivity Platform</strong>
+          </div>
+        </div>
+        <h1>Welcome to Parentor</h1>
+        <p class="hero-text">Login to continue. Teachers can manage attendance, performance and updates, while parents can view their child's progress through one smart school-tech platform.</p>
+        <div class="feature-pills" aria-label="Portal features">
+          <span>AI Face Attendance</span>
+          <span>Marks Dashboard</span>
+          <span>Parent Updates</span>
+        </div>
       </div>
 
-      <form id="teacherForm" class="login-form">
-        <h2>Teacher Login</h2>
-        <label>
-          Staff Name
-          <input id="teacherName" type="text" placeholder="Teacher name" autocomplete="username">
-        </label>
-        <button class="btn primary full" type="submit">Enter Teacher Dashboard</button>
-      </form>
+      <div class="login-card-panel login-card-panel-right" aria-label="Login options">
+        <article class="portal-login-card login-card-collapsed" data-login-card="teacher">
+          <button class="portal-card-summary" type="button" data-login-trigger="teacher">
+            <span class="portal-icon">T</span>
+            <span>
+              <strong>Teacher Portal</strong>
+              <small>Manage students, attendance, remarks and announcements</small>
+            </span>
+          </button>
+          <form id="teacherForm" class="login-form portal-login-form">
+            <label>
+              Teacher Name
+              <input id="teacherName" type="text" placeholder="N. KOTHIYAL" autocomplete="username">
+              <small class="field-error" id="teacherNameError"></small>
+            </label>
+            <label>
+              Password
+              <div class="password-field">
+                <input id="teacherPassword" type="password" placeholder="Teacher password" autocomplete="current-password">
+                <button class="btn ghost compact password-toggle" id="toggleTeacherPassword" type="button" aria-label="Show teacher password">Show</button>
+              </div>
+              <small class="field-error" id="teacherPasswordError"></small>
+            </label>
+            <button class="btn primary full" id="teacherLoginButton" type="submit">Login as Teacher</button>
+            <div class="demo-box">
+              <strong>Demo teacher</strong>
+              <span>Name: N. KOTHIYAL</span>
+              <span>Password: PARENTOR@123</span>
+            </div>
+          </form>
+        </article>
 
-      <form id="parentForm" class="login-form hidden">
-        <h2>Parent Login</h2>
-        <label>
-          Student ID
-          <input id="parentId" type="text" placeholder="Example: 101" autocomplete="username">
-        </label>
-        <label>
-          Password
-          <div class="password-field">
-            <input id="parentPassword" type="password" placeholder="Student password" autocomplete="current-password">
-            <button class="btn ghost compact" id="toggleParentPassword" type="button">Show</button>
-          </div>
-        </label>
-        <button class="btn primary full" type="submit">Enter Parent Dashboard</button>
-      </form>
+        <article class="portal-login-card login-card-collapsed" data-login-card="parent">
+          <button class="portal-card-summary" type="button" data-login-trigger="parent">
+            <span class="portal-icon">P</span>
+            <span>
+              <strong>Parent Portal</strong>
+              <small>View marks, attendance, remarks and leave requests</small>
+            </span>
+          </button>
+          <form id="parentForm" class="login-form portal-login-form">
+            <label>
+              Student ID
+              <input id="parentId" type="text" placeholder="Example: 101" autocomplete="username">
+              <small class="field-error" id="parentIdError"></small>
+            </label>
+            <label>
+              Password
+              <div class="password-field">
+                <input id="parentPassword" type="password" placeholder="Student password" autocomplete="current-password">
+                <button class="btn ghost compact password-toggle" id="toggleParentPassword" type="button" aria-label="Show parent password">Show</button>
+              </div>
+              <small class="field-error" id="parentPasswordError"></small>
+            </label>
+            <button class="btn primary full" id="parentLoginButton" type="submit">Login as Parent</button>
+            <div class="demo-box">
+              <strong>Demo parent</strong>
+              <span>Student ID: 101</span>
+              <span>Password: ADARSH</span>
+            </div>
+          </form>
+        </article>
+      </div>
     </section>
   </main>
 
   <div id="toastRoot" class="toast-root"></div>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/data.js"></script>
+  <script src="js/data.js?v=daywise-attendance-2026-05-07"></script>
   <script src="data/student-passwords.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=daywise-attendance-2026-05-07"></script>
   <script src="js/auth.js"></script>
 </body>
 </html>

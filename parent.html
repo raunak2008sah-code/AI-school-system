@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parent Dashboard | NAVYUG SCHOOL</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Parentor Parent Dashboard - Smart Parent-Teacher Connectivity Platform">
+  <title>Parentor | Parent Dashboard</title>
+  <link rel="stylesheet" href="css/style.css?v=final-polish-2026-05-07">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
       <div class="school-header">
-        <img src="assets/logo.png" alt="School Logo" class="school-logo">
+        <div class="brand-mark school-logo" aria-hidden="true">P</div>
         <div class="school-text">
-          <h3>NAVYUG SCHOOL</h3>
-          <p>Parent</p>
+          <h3>Parentor</h3>
+          <p>Parent Dashboard</p>
         </div>
       </div>
       <section class="sidebar-profile">
@@ -37,11 +38,16 @@
     <main class="dashboard">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Parent Dashboard</p>
+          <p class="eyebrow">Parentor Parent Dashboard</p>
           <h1 id="parentTitle">Student Profile</h1>
         </div>
-        <button class="btn ghost" onclick="goToLogin()">Logout</button>
+        <div class="topbar-actions">
+          <button class="btn ghost" id="printReport" type="button">Print Report</button>
+          <button class="btn ghost" onclick="goToLogin()">Logout</button>
+        </div>
       </header>
+
+      <section class="student-profile-hero panel" id="parentProfileHero"></section>
 
       <section class="stats-grid parent-summary" id="performanceSummary"></section>
 
@@ -117,6 +123,16 @@
         <article class="panel">
           <div class="panel-head"><h2>Leave Application</h2></div>
           <form id="leaveForm" class="leave-form">
+            <div class="form-grid">
+              <label>
+                From Date
+                <input id="leaveFromDate" type="date">
+              </label>
+              <label>
+                To Date
+                <input id="leaveToDate" type="date">
+              </label>
+            </div>
             <textarea id="leaveReason" rows="4" placeholder="Reason for leave"></textarea>
             <button class="btn primary full" type="submit">Submit Leave Request</button>
           </form>
@@ -124,19 +140,22 @@
         </article>
 
         <article class="panel wide-panel">
-          <div class="panel-head"><h2>Attendance History</h2></div>
+          <div class="panel-head"><h2>Day-Wise Attendance History</h2></div>
+          <div id="parentMonthlyAttendanceSummary" class="parent-monthly-attendance"></div>
           <div id="attendanceHistory" class="history-list"></div>
         </article>
       </section>
     </main>
   </div>
 
+  <section id="printReportPage" class="print-report-page" aria-hidden="true"></section>
+
   <div id="toastRoot" class="toast-root"></div>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/parent.js"></script>
+  <script src="js/data.js?v=daywise-attendance-2026-05-07"></script>
+  <script src="js/main.js?v=daywise-attendance-2026-05-07"></script>
+  <script src="js/parent.js?v=daywise-attendance-2026-05-07"></script>
 </body>
 </html>
